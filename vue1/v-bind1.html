@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+</head>
+<body>
+    <div id="simple">
+        <input type="text" id="a" v-bind:value="message">
+        <br>
+        <img v-bind:src="imagePath">
+    </div>
+    <script type="text/javascript">
+        var model = {
+            message : 'v-bind 디렉티브',
+            imagePath: "http://sample.bmaster.kro.kr/photos/61.jpg"
+        };
+        //모델(Model) 객체
+
+        var simple = new Vue({
+            el: '#simple',
+            data: model
+        })
+        //뷰모델(ViewModel) 객체
+    </script>
+</body>
+</html>
