@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+</head>
+<body>
+    <div id="example">
+        <table id="list">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>전화번호</th>
+                    <th>주소</th>
+                </tr>
+            </thead>
+            <tbody id="contacts">
+                <tr v-for="contact in contacts">
+                    <td>{{contact.no}}</td>
+                    <td>{{contact.name}}</td>
+                    <td>{{contact.tel}}</td>
+                    <td>{{contact.address}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript">
+        var model = {
+            "pageno": 1,
+            "pagesize": 10,
+            "totalcount": 100,
+            "contacts": [
+                {"no": 100, "name": "test1", "tel": "010-1234-5678", "address": "서울"},
+                {"no": 99, "name": "test2", "tel": "010-1234-5678", "address": "서울"},
+                {"no": 98, "name": "test3", "tel": "010-1234-5678", "address": "경기"},
+                {"no": 97, "name": "test4", "tel": "010-1234-5678", "address": "강원"},
+                {"no": 96, "name": "test5", "tel": "010-1234-5678", "address": "대구"},
+                {"no": 95, "name": "test6", "tel": "010-1234-5678", "address": "대전"},
+                {"no": 94, "name": "test7", "tel": "010-1234-5678", "address": "경기"},
+                {"no": 93, "name": "test8", "tel": "010-1234-5678", "address": "서울"},
+                {"no": 92, "name": "test9", "tel": "010-1234-5678", "address": "서울"},
+                {"no": 91, "name": "test10", "tel": "010-1234-5678", "address": "전남"}, 
+            ]
+        }
+
+        var list = new Vue({
+            el: "#example",
+            data: model
+        });
+    </script>
+</body>
+</html>
