@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+</head>
+<body>
+    <div id="example" @contextmenu="ctxStop">
+        <a href="https://facebook.com" @click="confirmFB">페이스북</a>
+    </div>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#example",
+            methods: {
+                ctxStop: function(e){
+                    e.preventDefault();
+                },
+                //ctxStop 메서드는 무조건 preventDefault() 메서드를 호출
+                confirmFB: function(e){
+                    if(!confirm("페이스북으로 이동할까요?")){
+                        e.preventDefault();
+                    }
+                }
+                //confirmFB 메서드는 confirm에서 취소 시 preventDefault() 메서드를 호출
+            }
+        })
+    </script>
+</body>
+</html>

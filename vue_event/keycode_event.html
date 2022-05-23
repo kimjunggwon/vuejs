@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #list{
+            width: 600px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        #list td, #list th{
+            border: 1px solid black;
+            text-align: center;
+        }
+        #list > thead > tr{
+            color: yellow;
+            background-color: purple;
+        }
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="example" v-cloak>
+        <p>
+            이름 : <input type="text" v-model="name" v-on:keyup="search" placeholder="두자 이상 입력하세요">
+        </p>
+        <table id="list">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>전화번호</th>
+                    <th>주소</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="contact in contactlist">
+                    <td>{{contact.no}}</td>
+                    <td>{{contact.name}}</td>
+                    <td>{{contact.tel}}</td>
+                    <td>{{contact.address}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div v-show="isProcessing === true">조회중</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.6.2/fetch.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.2.8/es6-promise.min.js"></script>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#example",
+            data: {
+                name: "",
+                isProcessing: false,
+                contactlist: []
+            },
+            methods: {
+                search: function(e){
+                    if(e.keyCode === 13){
+                        var val = e.target.value;
+                        if(val.length >= 2){
+                            this.fetchContacts();
+                        //문자열이 2개 이상일 경우 조회
+                        }else{
+                            this.contactlist = [];
+                        //문자열이 2개 미만일 경우는 빈 배열
+                        }
+                    }
+                },
+                //keycode 13은 엔터
+                fetchContacts: function() {
+                //_.debounce : 일정 시간이 지나도록 연속인 호출이 일어나지 않으면 실제 api 호출
+                //불필요한 네트워크 트래픽 발생을 줄임
+                    this.contactlist = [];
+                    this.isProcessing = true;
+                    var url = "http://sample.bmaster.kro.kr/contacts_long/search/" + this.name;
+                    var vm = this;
+                    fetch(url)
+                    //리턴 값은 promise 객체이며 비동기 처리를 위해서 주로 사용
+                        .then(function(response){
+                            return response.json()
+                        }).then(function(json){
+                            vm.contactlist = json;
+                            vm.isProcessing = false;
+                        }).catch(function(ex){
+                            console.log('parsing failed', ex);
+                            vm.contactlist = [];
+                            vm.isProcessing = false;
+                        });
+                    }
+                }
+        });
+    </script>
+</body>
+</html>
