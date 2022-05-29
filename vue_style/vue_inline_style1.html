@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+</head>
+<body>
+    <div id="example">
+        <button id="a" v-bind:style="style1" @mouseover.stop="overEvent" @mouseout.stop="outEvent">
+            테스트
+        </button>
+    </div>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el: "#example",
+            data: {
+                style1: {
+                    backgroundColor: 'aqua',
+                    border: '1px solid gray',
+                    width: '100px',
+                    textAlign: 'center'
+                }
+            },
+            methods: {
+                overEvent: function(e){
+                    this.style1.backgroundColor = "purple";
+                    this.style1.color = "yellow";
+                },
+                //마우스 오버 시 이벤트
+                outEvent: function(e){
+                    this.style1.backgroundColor = "aqua";
+                    this.style1.color = "black";
+                }
+                //마우스 아웃 시 이벤트
+            }
+        })
+    </script>
+</body>
+</html>
