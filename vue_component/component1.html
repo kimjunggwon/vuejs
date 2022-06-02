@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+</head>
+<body>
+    <div id="app">
+        <hello-component></hello-component>
+        <hello-component></hello-component>
+        <hello-component></hello-component>
+    </div>
+    <script type="text/javascript">
+        Vue.component('hello-component', {
+            template: '<div>hello world</div>'
+        });
+        //등록한 컴포넌트 태그명 추가, 옵션에는 템플릿을 추가
+        var vm = new Vue({
+            el: '#app'
+        });
+        Vue.config.devtools = true;
+    </script>
+</body>
+</html>
