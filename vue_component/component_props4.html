@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+</head>
+<template id="listTemplate">
+    <li>{{message}}</li>
+</template>
+<script type="text/javascript">
+    Vue.component('list-component',{
+        template: '#listTemplate',
+        props: {
+            message: {
+                type: String,
+                default: 'hello'
+            },
+            count: {
+                type: Number,
+                required: true
+            },
+            countries: {
+                type: Array,
+                default: function(){
+                    return ['대한민국'];
+                }
+            }
+            //전달할 값이 배열 또는 객체인 경우 기본 값을 부여하려면 반드시 함수를 이용
+        }
+    });
+</script>
+<body>
+    <div id="app">
+        <ul>
+            <list-component message="Hello" v-bind:count="100" v-bind:countries="['미국', '영국', '호주']"></list-component>
+            <list-component message="씬짜오" :count="21" :countries="['베트남']"></list-component>
+            <list-component message="니하오마" :countries="['중국', '타이완']"></list-component>
+            <list-component v-bind:count="1000"></list-component>
+        </ul>
+    </div>
+</body>
+<script type="text/javascript">
+    Vue.config.devtools = true;
+    var vm = new Vue({
+        el: "#app"
+    });
+</script>
+</html>

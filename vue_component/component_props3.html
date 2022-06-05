@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+</head>
+<template id="listTemplate">
+    <li>{{message}}</li>
+</template>
+<script type="text/javascript">
+    Vue.component('list-component',{
+        template: '#listTemplate',
+        props: {
+            message: {
+                type: String,
+                default: 'hello'
+            },
+            //데이터 타입은 문자형이며, 기본값은 hello
+            count: {
+                type: Number,
+                required: true
+            }
+            //데이터 타입은 숫자형이며, 필수 입력
+        }
+        //배열 형식이 아닌 객체 형식
+    });
+</script>
+<body>
+    <div id="app">
+        <ul>
+            <list-component message="Hello" v-bind:count="100"></list-component>
+            <list-component message="씬짜오" :count="21"></list-component>
+            <list-component message="니하오마"></list-component>
+            <list-component :count="1000"></list-component>
+        </ul>
+    </div>
+</body>
+<script type="text/javascript">
+    Vue.config.devtools = true;
+    var vm = new Vue({
+        el: "#app"
+    });
+</script>
+</html>
