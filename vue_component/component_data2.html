@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+</head>
+<template id="timeTemplate">
+    <div>
+        <span>{{nowTS}}</span>
+        <button v-on:click="timeClick">현재 시간</button>
+    </div>
+</template>
+<script type="text/javascript">
+    var data = { nowTS: 0};
+    //전역 변수에 객체를 할당
+    Vue.component('time-component', {
+        template: '#timeTemplate',
+        data: function(){
+            return data;
+        },
+        //동일한 Component를 여러 번 사용하더라도 data 옵션은 모두 동일한 객체를 참조
+        methods: {
+            timeClick: function(e){
+                this.nowTS = (new Date()).getTime();
+            }
+        }
+    });
+</script>
+<body>
+    <div id="app">
+        <time-component></time-component>
+        <time-component></time-component>
+    </div>
+</body>
+<script type="text/javascript">
+    Vue.config.devtools = true;
+    var v = new Vue({
+        el: '#app'
+    });
+</script>
+</html>

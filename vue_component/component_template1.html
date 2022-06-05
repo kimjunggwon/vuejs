@@ -8,23 +8,15 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
 </head>
 <body>
-    <div id="app">
-        <template id="helloTemplate">
-            <div>
-             hello world!!!   
-            </div>
-        </template>
-    </div>
+    <template id="helloTemplate">
+        <div>
+         hello world!!!   
+        </div>
+    </template>
     <script type="text/javascript">
         Vue.component('hello-component', {
             template: '#helloTemplate'
         });
-        
-        var v = new Vue({
-            el: "#app"
-        })
-        //등록한 컴포넌트 태그명 추가, 옵션에는 템플릿을 추가
-        Vue.config.devtools = true;
     </script>
 </body>
 </html>

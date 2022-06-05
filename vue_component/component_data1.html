@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+</head>
+<template id="timeTemplate">
+    <div>
+        <span>{{nowTS}}</span>
+        <button v-on:click="timeClick">현재 시간</button>
+    </div>
+</template>
+<script type="text/javascript">
+    Vue.component('time-component', {
+        template: '#timeTemplate',
+        // data: {
+        //     nowTS: 0
+        // },
+        //일반적인 옵션으로 실행하면 오류가 발생
+        data: function(){
+            return {
+                nowTS: 0
+            }
+        },
+        //Component에서 정상적인 렌더링을 위해서는 data 옵션에 함수가 주어져야 함
+        //즉, 함수가 호출되어야 리턴된 객체가 data 옵션에 주어짐
+        methods: {
+            timeClick: function(e){
+                this.nowTS = (new Date()).getTime();
+            }
+        }
+    });
+</script>
+<body>
+    <div id="app">
+        <time-component></time-component>
+        <time-component></time-component>
+    </div>
+</body>
+<script type="text/javascript">
+    Vue.config.devtools = true;
+    var v = new Vue({
+        el: '#app'
+    });
+</script>
+</html>
