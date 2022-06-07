@@ -55,10 +55,11 @@
     })
 </script>
 <!-- contactlist-component 끝 -->
+
 <!-- search-component 시작 -->
 <template id="searchTemplate">
     <p>
-        이름: <input type="text" v-model.trim="name" :placeholder="placeholder" @keyup.event="keyupEvent">
+        이름: <input type="text" v-model.trim="name" :placeholder="placeholder" @keyup.enter="keyupEvent">
     </p>
 </template>
 <script type="text/javascript">
@@ -83,6 +84,7 @@
     })
 </script>
 <!-- search-component 끝 -->
+
 <!-- search-contact-component 시작 -->
 <template id="searchcontactTemplate">
     <div>
@@ -104,7 +106,7 @@
         methods: {
             searchEvent: function(name){
                 if(name == ''){
-                    this.contactlist = []
+                    this.contactlist = [];
                 }else{
                     this.fetchContacts(name);
                 }
@@ -112,11 +114,11 @@
             fetchContacts: _.debounce(function(name){
                 this.contactlist = [];
                 this.isProcessing = true;
-                var url = 'http://sample.bmaster.kro.kr/contacts_long/search/' + name;
+                var url = "http://sample.bmaster.kro.kr/contacts_long/search/" + name;
                 var vm = this;
                 fetch(url)
                     .then(function(response){
-                        return response.json();
+                        return response.json()
                     }).then(function(json){
                         vm.contactlist = json;
                         vm.isProcessing = false;
